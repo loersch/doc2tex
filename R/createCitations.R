@@ -1,3 +1,6 @@
+#' @title Erzeugt Zitate
+#' @description Erzeugt Zitate mithilfe der Befehle citep() und citet() aus dem Paket knicitations.
+#' @param bib Bibliothek
 #' @importFrom knitcitations citep citet cleanbib
 createCitations <- function (bib)
 {

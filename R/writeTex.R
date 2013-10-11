@@ -1,3 +1,12 @@
+#' @title Konvertieren von .doc-Datein zu .tex-Datein
+#' @description Erleichterung der Migration zu Latex. Hierzu werden die Befehle citet() und citep() des Pakets knitcitations verwendet.
+#' @param dir.in input-Verzeichnis
+#' @param dir.out output-Verzeichnis
+#' @param dir.bib bibtex-Verzeichnis
+#' @param cite erzeugt Verweise 
+#' @param quote ersetzen von Zitaten
+#' @param sec ersetzen Überschriften
+#' @param misc ersetzen von Steuerungszeichen
 #' @importFrom knitcitations read.bibtex
 #' @export writeTex
 writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, cite = T, quote = T, sec = T, misc = T) 
