@@ -3,3 +3,9 @@
 
 # Example code in package build process
 *-Ex.R
+.Rproj.user
+
+# ignore vim swp files and gedit temp files
+*.swp
+*.*~
+.vim

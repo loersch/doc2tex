@@ -1,0 +1,5 @@
+export(writeTex)
+importFrom(knitcitations,citep)
+importFrom(knitcitations,citet)
+importFrom(knitcitations,cleanbib)
+importFrom(knitcitations,read.bibtex)

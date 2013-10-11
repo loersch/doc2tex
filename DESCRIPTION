@@ -1,0 +1,16 @@
+Package: doc2tex
+Type: Package
+Title: Migrate to TeX
+Version: 0.01
+Date: 2013-10-03
+Author: Lars
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: Migrate .doc to .tex
+License: GPL-2
+Collate:
+    'createCitations.R'
+    'inlineFormats.R'
+    'replaceCitations.R'
+    'replaceTex.R'
+    'sapply_bp.R'
+    'writeTex.R'
