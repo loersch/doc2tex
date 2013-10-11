@@ -18,11 +18,11 @@ replaceSections <- function (txt)
 
 replaceMisc <- function (txt) 
 {
+  txt <- gsub('\\\\ ', '\\\\textbackslash ', txt)
+  txt <- gsub('(%|&|_)', '\\\\\\1', txt)
   txt <- sub('^Abbildung [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}', txt)
   txt <- sub('^Figure [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}', txt)
   txt <- sub('^Tabelle [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}', txt)
   txt <- sub('^Table [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}', txt)
-  txt <- gsub('\\\\ ', '\\\\textbackslash ', txt)
-  txt <- gsub('(%|&|_)', '\\\\\\1', txt)
   list(txt)
 }
