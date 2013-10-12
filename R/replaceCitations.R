@@ -12,10 +12,16 @@ replaceCitations <- function (citations.keys, txt, filename = NULL)
   
   txt2 <- txt1
   for (i in 1:length(keys1)) {
+    txt2 <- gsub(citations2m[i], "\\1\\5 \\1\\6",  txt2)
+  }
+  for (i in 1:length(keys1)) {
     txt2 <- gsub(citations2[i], paste("\\\\citep{", keys1[i], "}", sep = ""),  txt2)
   }
   
   txt3 <- txt2
+  for (i in 1:length(keys2)) {
+    txt3 <- gsub(citations3m[i], "\\1\\5 \\1\\6",  txt3)
+  }
   for (i in 1:length(keys2)) {
     txt3 <- gsub(citations3[i], paste("\\\\citep*{", keys2[i], "}", sep = ""),  txt3)
   }
