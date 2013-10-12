@@ -23,6 +23,12 @@ writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, cite = T, 
     filename <- sub(".tex", "", input)
     if (cite) {
       txt.out <- replaceCitations(citations.keys, txt.in, filename)
+      cC <- function (txt, pattern) sum(sapply(gregexpr(pattern, txt), function(x) sum(x>0)))
+      cat("Es wurden", cC(txt.out[[4]], "\\cite"), "Zitate erkannt:\n")
+      cat("\t+ citet :", cC(txt.out[[4]], "\\citet\\{"), "\n")
+      cat("\t+ citet*:", cC(txt.out[[4]], "\\citet\\*\\{"), "\n")
+      cat("\t+ citep :", cC(txt.out[[4]], "\\citep\\{"), "\n")
+      cat("\t+ citep*:", cC(txt.out[[4]], "\\citep\\*\\{"), "\n")
       index <- c("c1", "c2", "c3", "c4")
       names(txt.out) <- paste(filename, index, sep = "_")     
     } 

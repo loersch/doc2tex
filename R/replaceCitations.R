@@ -7,7 +7,7 @@ replaceCitations <- function (citations.keys, txt, filename = NULL)
     txt1 <- gsub(citations1m[i], "\\1\\3\\1\\(",  txt1)
   }
   for (i in 1:length(keys1)) {
-    txt1 <- gsub(citations1[i], paste("\\\\citep{", keys1[i], "}", sep = ""),  txt1)
+    txt1 <- gsub(citations1[i], paste("\\\\citet{", keys1[i], "}", sep = ""),  txt1)
   }
   
   txt2 <- txt1
