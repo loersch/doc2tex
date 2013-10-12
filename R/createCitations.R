@@ -17,10 +17,10 @@ createCitations <- function (bib)
   citations1 <- sub("\\(", "\\\\(", citations1)
   citations1 <- sub("\\)", "(\\\\)|,)", citations1)
   citations1 <- sub(" &", ",{0,1} (and|und|&)", citations1)
-  citations1 <- sub("et al.", "et al.(’s){0,1}", citations1)
   citations1 <- sub(" \\\\", "(’s){0,1} \\\\", citations1)
-  citations1m <- sub("([\\]+\\)|,)", ",", citations1)
-  citations1m <- sub("^([^\\.]*)([\\]+\\([0-9]{4},)$", "\\1\\2", citations1m)
+  citations1m <- sub("\\([\\]+)\\|,\\)", ",", citations1)
+  citations1m <- sub("^([^\\].*)([\\]+\\([0-9]{4},)$", "(\\1)(\\2 )", citations1m)
+  aa <<- citations1m
   cleanbib()
   
   # \citep ##
@@ -41,6 +41,7 @@ createCitations <- function (bib)
   citations3 <- sub("\\(", "", citations3)
   citations3 <- sub("\\)", "", citations3)
   citations3 <- sub(" &", ",{0,1} (and|und|(, ){0,1}&)", citations3)
+  cleanbib()
   
   # \citet*
   citetl.fun <- function(x, bib) suppressMessages(citet(bib[x], linked = F, format_inline_fn = format_authoryear_tl))
@@ -49,8 +50,9 @@ createCitations <- function (bib)
   citations4 <- sub("\\)", "(\\\\)|,)", citations4)
   citations4 <- sub(" &", ",{0,1} (and|und|&)", citations4)
   citations4 <- sub(" \\\\", "(’s){0,1} \\\\", citations4)
-  citations4m <- sub("([\\]+\\)|,)", ",", citations4)
-  citations4m <- sub("^([^\\.]*)([\\]+\\([0-9]{4},)$", "\\1\\2", citations4m)
+  citations4m <- sub("\\([\\]+)\\|,\\)", ",", citations4)
+  citations4m <- sub("^([^\\].*)([\\]+\\([0-9]{4},)$", "(\\1)(\\2 )", citations4m)
+  cleanbib()
   
   list(
     citations1 = citations1, citations2 = citations2, citations3 = citations3, 
