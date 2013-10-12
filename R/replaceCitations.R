@@ -4,7 +4,7 @@ replaceCitations <- function (citations.keys, txt, filename = NULL)
   list2env(citations.keys, env)
   txt1 <- txt
   for (i in 1:length(keys1)) {
-    txt1 <- gsub(citations1m[i], "\\1 [0-9]{4} \\1 [0-9]{4}",  txt1)
+    txt1 <- gsub(citations1m[i], "\\1\\2 \\1\\(",  txt1)
   }
   for (i in 1:length(keys1)) {
     txt1 <- gsub(citations1[i], paste("\\\\citep{", keys1[i], "}", sep = ""),  txt1)
@@ -22,7 +22,7 @@ replaceCitations <- function (citations.keys, txt, filename = NULL)
   
   txt4 <- txt3
   for (i in 1:length(keys1)) {
-    txt4 <- gsub(citations4m[i], "\\1 [0-9]{4} \\1 [0-9]{4}",  txt4)
+    txt4 <- gsub(citations4m[i], "\\1\\2 \\1\\(",  txt4)
   }
   for (i in 1:length(keys2)) {
     txt4 <- gsub(citations4[i], paste("\\\\citet*{", keys2[i], "}", sep = ""),  txt4)
