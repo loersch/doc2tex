@@ -37,7 +37,7 @@ createCitations <- function (bib)
   # build regex
   citations2 <- sub("\\(", "", citations2)
   citations2 <- sub("\\)", "", citations2)
-  citations2 <- sub(" &", ",{0,1} (and|und|(, ){0,1}&)", citations2)
+  citations2 <- sub(" &", ",{0,1} (and|und|&)", citations2)
   citations2 <- sub("et al.", "et al.((’s)|(,)){0,1}", citations2)
   citations2m <- sub("^([^0-9].*)([0-9]{4})$", "(\\1)(\\2), ([0-9]{4})", citations2)
   cleanbib()
@@ -58,7 +58,7 @@ createCitations <- function (bib)
   # regex
   citations3 <- sub("\\(", "", citations3)
   citations3 <- sub("\\)", "", citations3)
-  citations3 <- sub(" &", ",{0,1} (and|und|(, ){0,1}&)", citations3)
+  citations3 <- sub(" &", ",{0,1} (and|und|&)", citations3)
   citations3m <- sub("^([^0-9].*)([0-9]{4})$", "(\\1)(\\2), ([0-9]{4})", citations3)
   cleanbib()
   
