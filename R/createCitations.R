@@ -19,9 +19,9 @@ createCitations <- function (bib)
   keys1 <- keys1[order]
   citations1 <- citations1[order]
   # remove duplicated
-  dub <- grepl("[0-9]{4}[a-z]{1}", citations1) & !grepl("et al", citations1)
-  keys1 <- keys1[!dub]
-  citations1 <- citations1[!dub]
+  #dub <- grepl("[0-9]{4}[a-z]{1}", citations1) & !grepl("et al", citations1)
+  #keys1 <- keys1[!dub]
+  #citations1 <- citations1[!dub]
   # build regex
   citations1 <- sub("\\(", "\\\\(", citations1)
   citations1 <- sub("\\)", "(\\\\)|,)", citations1)
@@ -52,9 +52,9 @@ createCitations <- function (bib)
   citepl.fun <- function(x, bib) suppressMessages(citep(bib[x], linked = F, format_inline_fn = format_authoryear_pl))
   citations3 <- sapply_pb(keys2, citepl.fun, bib)
   # remove duplicated
-  dub <- grepl("[0-9]{4}[a-z]{1}", citations3)
-  keys2 <- keys2[!dub]
-  citations3 <- citations3[!dub]
+  #dub <- grepl("[0-9]{4}[a-z]{1}", citations3)
+  #keys2 <- keys2[!dub]
+  #citations3 <- citations3[!dub]
   # regex
   citations3 <- sub("\\(", "", citations3)
   citations3 <- sub("\\)", "", citations3)
