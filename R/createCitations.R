@@ -19,6 +19,8 @@ createCitations <- function (bib)
   citations1 <- sub(" &", ",{0,1} (and|und|&)", citations1)
   citations1 <- sub("et al.", "et al.(’s){0,1}", citations1)
   citations1 <- sub(" \\\\", "(’s){0,1} \\\\", citations1)
+  citations1m <- sub("\\\\([0-9]{4}(\\\\)|,)", "", citations1)
+  citations1m <- paste("(", citations1m, ")", sep ="")
   cleanbib()
   
   # \citep ##
@@ -47,9 +49,12 @@ createCitations <- function (bib)
   citations4 <- sub("\\)", "(\\\\)|,)", citations4)
   citations4 <- sub(" &", ",{0,1} (and|und|&)", citations4)
   citations4 <- sub(" \\\\", "(’s){0,1} \\\\", citations4)
+  citations4m <- sub("\\\\([0-9]{4}(\\\\)|,)", "", citations4)
+  citations4m <- paste("(", citations4m, ")", sep ="")
   
   list(
     citations1 = citations1, citations2 = citations2, citations3 = citations3, 
-    citations4 = citations4, keys1 = keys1, keys2 = keys2
+    citations4 = citations4, citations1m = citations1m, citations4m = citations4m,
+    keys1 = keys1, keys2 = keys2
   )
 }
