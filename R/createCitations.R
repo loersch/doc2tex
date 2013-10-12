@@ -8,6 +8,7 @@ createCitations <- function (bib)
   keys <- names(bib)
   
   # \citet ##
+  print("prepare: citet")
   citations1 <- sapply_pb(keys, function(x, bib) suppressMessages(citet(bib[x], linked = F)), bib)
   # delete empty citations
   empty <- sapply(citations1, length)
@@ -31,6 +32,7 @@ createCitations <- function (bib)
   cleanbib()
   
   # \citep ##
+  print("prepare: citep")
   citations2 <- sapply_pb(keys1, function(x, bib) suppressMessages(citep(bib[x], linked = F)), bib)
   # build regex
   citations2 <- sub("\\(", "", citations2)
@@ -40,10 +42,13 @@ createCitations <- function (bib)
   citations2m <- sub("^([^0-9].*)([0-9]{4})$", "(\\1)(\\2), ([0-9]{4})", citations2)
   cleanbib()
   
-  # \citep*
+  
   # delete dulplicated entries
   etal <- grepl("et al", citations2)
   keys2 <- keys1[etal]
+  
+  # \citep*
+  print("prepare: citep*")
   citepl.fun <- function(x, bib) suppressMessages(citep(bib[x], linked = F, format_inline_fn = format_authoryear_pl))
   citations3 <- sapply_pb(keys2, citepl.fun, bib)
   # remove duplicated
@@ -58,6 +63,7 @@ createCitations <- function (bib)
   cleanbib()
   
   # \citet*
+  print("prepare: citet*")
   citetl.fun <- function(x, bib) suppressMessages(citet(bib[x], linked = F, format_inline_fn = format_authoryear_tl))
   citations4 <- sapply_pb(keys2, citetl.fun, bib)
   # regex
