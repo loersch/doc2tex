@@ -22,7 +22,7 @@ replaceCitations <- function (citations.keys, txt, filename = NULL)
   
   txt4 <- txt3
   for (i in 1:length(keys1)) {
-    txt4 <- gsub(citations4m[i], "\\1 [0-9]{4} \\1 [0-9]{4}"),  txt4)
+    txt4 <- gsub(citations4m[i], "\\1 [0-9]{4} \\1 [0-9]{4}",  txt4)
   }
   for (i in 1:length(keys2)) {
     txt4 <- gsub(citations4[i], paste("\\\\citet*{", keys2[i], "}", sep = ""),  txt4)
