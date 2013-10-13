@@ -26,8 +26,9 @@ createCitations <- function (bib)
   citations1 <- sub("\\(", "\\\\(", citations1)
   citations1 <- sub("\\)", "(\\\\)|,)", citations1)
   citations1 <- sub(" &", ",{0,1} (and|und|&)", citations1)
-  citations1 <- sub(" \\\\", "(’s){0,1} \\\\", citations1)
-  citations1m <- sub("\\([\\]+)\\|,\\)", ",", citations1)
+  citations1a <- sub(" \\\\", "’s \\\\", citations1)
+  citations1m <- sub(" \\\\", "(’s){0,1} \\\\", citations1)
+  citations1m <- sub("\\([\\]+)\\|,\\)", ",", citations1m)
   citations1m <- sub("^([^\\].*)([\\]+\\([0-9]{4},)$", "(\\1)(\\2 )", citations1m)
   cleanbib()
   
@@ -38,8 +39,10 @@ createCitations <- function (bib)
   citations2 <- sub("\\(", "", citations2)
   citations2 <- sub("\\)", "", citations2)
   citations2 <- sub(" &", ",{0,1} (and|und|&)", citations2)
-  citations2 <- sub("et al.", "et al.((’s)|(,)){0,1}", citations2)
-  citations2m <- sub("^([^0-9].*)([0-9]{4})$", "(\\1)(\\2), ([0-9]{4})", citations2)
+  citations2a <- sub("et al.", "et al.’s", citations2) 
+  citations2m <- sub("et al.", "et al.((’s)|(,)){0,1}", citations2)
+  citations2m <- sub("^([^0-9].*)([0-9]{4})$", "(\\1)(\\2), ([0-9]{4})", citations2m)
+  citations2 <- sub("et al.", "et al.(,){0,1}", citations2)
   cleanbib()
   
   
@@ -59,7 +62,10 @@ createCitations <- function (bib)
   citations3 <- sub("\\(", "", citations3)
   citations3 <- sub("\\)", "", citations3)
   citations3 <- sub(" &", ",{0,1} (and|und|&)", citations3)
-  citations3m <- sub("^([^0-9].*)([0-9]{4})$", "(\\1)(\\2), ([0-9]{4})", citations3)
+  citations3a <- sub("et al.", "et al.’s", citations3) 
+  citations3m <- sub("et al.", "et al.((’s)|(,)){0,1}", citations3)
+  citations3m <- sub("^([^0-9].*)([0-9]{4})$", "(\\1)(\\2), ([0-9]{4})", citations3m)
+  citations3 <- sub("et al.", "et al.(,){0,1}", citations3)
   cleanbib()
   
   # \citet*
@@ -70,14 +76,18 @@ createCitations <- function (bib)
   citations4 <- sub("\\(", "\\\\(", citations4)
   citations4 <- sub("\\)", "(\\\\)|,)", citations4)
   citations4 <- sub(" &", ",{0,1} (and|und|&)", citations4)
-  citations4 <- sub(" \\\\", "(’s){0,1} \\\\", citations4)
-  citations4m <- sub("\\([\\]+)\\|,\\)", ",", citations4)
+  citations4a <- sub(" \\\\", "’s \\\\", citations4)
+  citations4m <- sub(" \\\\", "(’s){0,1} \\\\", citations4)
+  citations4m <- sub("\\([\\]+)\\|,\\)", ",", citations4m)
   citations4m <- sub("^([^\\].*)([\\]+\\([0-9]{4},)$", "(\\1)(\\2 )", citations4m)
   cleanbib()
   
   list(
-    citations1 = citations1, citations2 = citations2, citations3 = citations3, 
-    citations4 = citations4, citations1m = citations1m, citations2m = citations2m,
+    citations1 = citations1, citations2 = citations2, 
+    citations3 = citations3, citations4 = citations4, 
+    citations1a = citations1a, citations2a = citations2a,
+    citations3a = citations3a, citations4a = citations4a,
+    citations1m = citations1m, citations2m = citations2m,
     citations3m = citations3m, citations4m = citations4m,
     keys1 = keys1, keys2 = keys2
   )
