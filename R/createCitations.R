@@ -18,7 +18,7 @@ createCitations <- function (bib)
   order <- order(-nchar(unlist(citations1)), unlist(citations1))
   keys1 <- keys1[order]
   citations1 <- citations1[order]
-  cit1 <<- citations1
+  #cit1 <<- citations1
   # remove duplicated
   #dub <- grepl("[0-9]{4}[a-z]{1}", citations1) & !grepl("et al", citations1)
   #keys1 <- keys1[!dub]
@@ -35,13 +35,13 @@ createCitations <- function (bib)
   # \citep ##
   cat("prepare: citep\n")
   citations2 <- sapply_pb(keys1, function(x, bib) format_authoryear_p(bib[x]), bib)
-  cit2 <<- citations2
+  #cit2 <<- citations2
   # build regex
   #citations2 <- sub("\\(", "", citations2)
   #citations2 <- sub("\\)", "", citations2)
   citations2 <- sub(" &", ",{0,1} (and|und|&)", citations2)
   citations2a <- sub("(, ([0-9]{4}))", "’s \\2", citations2)
-  citations2m <- sub("(,( [0-9]{4}))", "[(’s)|(,)]{0,1}\\2", citations2)
+  citations2m <- sub("(,{0,1}( [0-9]{4}))", "[(’s)|(,)]{0,1}\\2", citations2)
   citations2m <- sub("^([^0-9].*)([0-9]{4})$", "(\\1)(\\2), ([0-9]{4})", citations2m)
   citations2 <- sub("et al.", "et al.(,){0,1}", citations2)
   
@@ -52,7 +52,7 @@ createCitations <- function (bib)
   # \citep*
   cat("prepare: citep*\n")
   citations3 <- sapply_pb(keys2, function(x, bib) format_authoryear_pl(bib[x]), bib)
-  cit3 <<- citations3
+  #cit3 <<- citations3
   # remove duplicated
   #dub <- grepl("[0-9]{4}[a-z]{1}", citations3)
   #keys2 <- keys2[!dub]
@@ -69,7 +69,7 @@ createCitations <- function (bib)
   # \citet*
   cat("prepare: citet*\n")
   citations4 <- sapply_pb(keys2, function(x, bib) format_authoryear_tl(bib[x]), bib)
-  cit4 <<- citations4
+  #cit4 <<- citations4
   # regex
   citations4 <- sub("\\(", "\\\\(", citations4)
   citations4 <- sub("\\)", "(\\\\)|,)", citations4)
