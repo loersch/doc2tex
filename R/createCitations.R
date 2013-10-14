@@ -1,8 +1,8 @@
 #' @title Erzeugt Zitate
 #' @description Erzeugt Zitate mithilfe der Befehle citep() und citet() aus dem Paket knicitations.
 #' @param bib Bibliothek
-
-createCitations <- function (bib)
+#' @param dup.rm remove duplicated entries
+createCitations <- function (bib, dup.rm)
 {
   # bibtex-keys
   keys <- names(bib)
@@ -23,6 +23,13 @@ createCitations <- function (bib)
   #dub <- grepl("[0-9]{4}[a-z]{1}", citations1) & !grepl("et al", citations1)
   #keys1 <- keys1[!dub]
   #citations1 <- citations1[!dub]
+  # Key fuer citet* und citep*, delete dulplicated entries, i.e != et al.
+  etal <- grepl("et al", citations1)
+  keys2 <- keys1[etal]
+  if (dup.rm) {
+    keys1 <- keys1[!duplicated(citations1)]
+    citations1 <- citations1[!duplicated(citations1)]
+  }
   # build regex
   citations1 <- sub("\\(", "\\\\(", citations1)
   citations1 <- sub("\\)", "(\\\\)|,)", citations1)
@@ -34,7 +41,7 @@ createCitations <- function (bib)
   
   # \citep ##
   cat("prepare: citep\n")
-  citations2 <- sapply_pb(keys1, function(x, bib) format_authoryear_p(bib[x]), bib)
+  citations2 <- sapply_pb(keys, function(x, bib) format_authoryear_p(bib[x]), bib)
   #cit2 <<- citations2
   # build regex
   #citations2 <- sub("\\(", "", citations2)
@@ -45,10 +52,6 @@ createCitations <- function (bib)
   citations2m <- sub("^([^0-9].*)([0-9]{4})$", "(\\1)(\\2), ([0-9]{4})", citations2m)
   citations2 <- sub("et al.", "et al.(,){0,1}", citations2)
   
-  # delete dulplicated entries
-  etal <- grepl("et al", citations2)
-  keys2 <- keys1[etal]
-  
   # \citep*
   cat("prepare: citep*\n")
   citations3 <- sapply_pb(keys2, function(x, bib) format_authoryear_pl(bib[x]), bib)
@@ -57,6 +60,10 @@ createCitations <- function (bib)
   #dub <- grepl("[0-9]{4}[a-z]{1}", citations3)
   #keys2 <- keys2[!dub]
   #citations3 <- citations3[!dub]
+  if (dup.rm) {
+    keys2 <- keys2[!duplicated(citations3)]
+    citations3 <- citations3[!duplicated(citations3)]
+  }
   # regex
   #citations3 <- sub("\\(", "", citations3)
   #citations3 <- sub("\\)", "", citations3)

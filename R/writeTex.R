@@ -9,14 +9,14 @@
 #' @param misc ersetzen von Steuerungszeichen
 #' @importFrom knitcitations read.bibtex
 #' @export writeTex
-writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, cite = T, quote = T, sec = T, misc = T) 
+writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, cite = T, quote = T, sec = T, misc = T, dup.rm = F) 
 {
   if (cite) {
     if (is.null(dir.bib)) 
       dir.bib <- getwd()
     bib <- suppressMessages(read.bibtex(list.files(dir.bib, pattern = ".bib$")))
     cat("Erstellen der Verweise:\n")
-    citations.keys <- createCitations(bib)
+    citations.keys <- createCitations(bib, dup.rm)
   }
   files <- list.files(dir.in, pattern = ".tex")
   writeSingle <- function (input, citations.keys) {

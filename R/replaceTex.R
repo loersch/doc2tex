@@ -24,5 +24,6 @@ replaceMisc <- function (txt)
   txt <- sub('^Figure [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}', txt)
   txt <- sub('^Tabelle [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}', txt)
   txt <- sub('^Table [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}', txt)
+  txt <- sub("’", "'", txt)
   list(txt)
 }
