@@ -70,7 +70,7 @@ writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, cite = T, 
     }         
     cat("Schreibe Daten:\n",names(txt.out),"\n")
     for (name in names(txt.out)) {
-      writeLines(text = txt.out[[name]], paste(dir.out, "/", name, ".tex", sep = ""))
+      writeLines(text = txt.out[[name]], paste(dir.out, "/", name, ".tex", sep = ""), useBytes = TRUE)
     }
   }
   quiet <- sapply(files, writeSingle, citations.keys)
