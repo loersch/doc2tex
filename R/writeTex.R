@@ -21,7 +21,7 @@ writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, cite = T, 
   files <- list.files(dir.in, pattern = ".txt")
   writeSingle <- function (input, citations.keys) {
     txt.in <- readLines(paste(dir.in, input, sep = "/"), encoding = "UTF-8")
-    filename <- sub(".tex", "", input)
+    filename <- sub(".txt", "", input)
     cat("\nDokument:", filename, "\n")
     if (cite) {
       txt.out <- replaceCitations(citations.keys, txt.in, filename)
