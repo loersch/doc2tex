@@ -10,7 +10,7 @@ replaceQuotations <- function (txt)
 replaceSections <- function (txt) 
 {
   txt <- sub('^([0-9]+\\.){2}[ ]{1,2}([A-z ]+)$', '\\\\section{\\2}\n\\\\label{sec:\\2}', txt)
-  txt <- sub('^([0-9]+\\.){3}{1,2}([A-z ]+)$', '\\\\subsection{\\2}\n\\\\label{ssec:\\2}', txt)
+  txt <- sub('^([0-9]+\\.){3}[ ]{1,2}([A-z ]+)$', '\\\\subsection{\\2}\n\\\\label{ssec:\\2}', txt)
   txt <- sub('^(Abstract)$', '\\\\section*{\\1}\n\\\\label{sec:\\2}', txt)
   txt <- sub('^([A-z ]+)$', '\\\\subsection*{\\1}\n\\\\label{ssec:\\2}', txt)
   list(txt)
