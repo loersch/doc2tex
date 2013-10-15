@@ -41,7 +41,7 @@ createCitations <- function (bib, dup.rm)
   
   # \citep ##
   cat("prepare: citep\n")
-  citations2 <- sapply_pb(keys, function(x, bib) format_authoryear_p(bib[x]), bib)
+  citations2 <- sapply_pb(keys1, function(x, bib) format_authoryear_p(bib[x]), bib)
   #cit2 <<- citations2
   # build regex
   #citations2 <- sub("\\(", "", citations2)

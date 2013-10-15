@@ -9,7 +9,7 @@
 #' @param misc ersetzen von Steuerungszeichen
 #' @importFrom knitcitations read.bibtex
 #' @export writeTex
-writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, cite = T, quote = T, sec = T, misc = T, dup.rm = F) 
+writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, cite = T, quote = T, sec = T, misc = T, dup.rm = T) 
 {
   if (cite) {
     if (is.null(dir.bib)) 

@@ -3,7 +3,7 @@
 \title{Konvertieren von .doc-Datein zu .tex-Datein}
 \usage{
   writeTex(dir.in = "in", dir.out = "out", dir.bib = NULL,
-    cite = T, quote = T, sec = T, misc = T, dup.rm = F)
+    cite = T, quote = T, sec = T, misc = T, dup.rm = T)
 }
 \arguments{
   \item{dir.in}{input-Verzeichnis}
