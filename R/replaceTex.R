@@ -20,10 +20,12 @@ replaceMisc <- function (txt)
 {
   txt <- gsub('\\\\ ', '\\\\textbackslash ', txt)
   txt <- gsub('(%|&|_)', '\\\\\\1', txt)
+  txt <- gsub(" (\\\\%)", "\\\\,\\1", txt)
   txt <- sub('^Abbildung [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}', txt)
   txt <- sub('^Figure [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}', txt)
   txt <- sub('^Tabelle [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}', txt)
   txt <- sub('^Table [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}', txt)
+  # txt <- gsub("[^\\{]([A-z]+\\.)([A-z]{1})", "\\1\\\\,\\2", txt)
   txt <- gsub("’", "'", txt)
   list(txt)
 }
