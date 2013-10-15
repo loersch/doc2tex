@@ -18,7 +18,7 @@ writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, cite = T, 
     cat("Erstellen der Verweise:\n")
     citations.keys <- createCitations(bib, dup.rm)
   }
-  files <- list.files(dir.in, pattern = ".tex")
+  files <- list.files(dir.in, pattern = ".txt")
   writeSingle <- function (input, citations.keys) {
     txt.in <- readLines(paste(dir.in, input, sep = "/"), encoding = "UTF-8")
     filename <- sub(".tex", "", input)
