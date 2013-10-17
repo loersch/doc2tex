@@ -34,6 +34,6 @@ replaceMisc <- function (txt)
   txt <- sub('^Tabelle [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}\n%\\\\label{tab:\\2}', txt)
   txt <- sub('^Table [0-9\\.]+(\\.|:) (.*)$', '%\\\\caption{\\2}\n%\\\\label{tab:\\2}', txt)
   # txt <- gsub("[^\\{]([A-z]+\\.)([A-z]{1})", "\\1\\\\,\\2", txt)
-  txt <- gsub("’", "'", txt)
+  txt <- gsub("’|‘", "'", txt)
   list(txt)
 }
