@@ -14,3 +14,4 @@ Collate:
     'replaceTex.R'
     'sapply_bp.R'
     'writeTex.R'
+    'readBibtex.R'

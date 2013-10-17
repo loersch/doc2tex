@@ -3,7 +3,8 @@
 \title{Konvertieren von .doc-Datein zu .tex-Datein}
 \usage{
   writeTex(dir.in = "in", dir.out = "out", dir.bib = NULL,
-    cite = T, quote = T, sec = T, misc = T, dup.rm = T)
+    encoding = "UTF-8", cite = T, quote = T, sec = T,
+    misc = T, dup.rm = T)
 }
 \arguments{
   \item{dir.in}{input-Verzeichnis}
@@ -11,6 +12,8 @@
   \item{dir.out}{output-Verzeichnis}
 
   \item{dir.bib}{bibtex-Verzeichnis}
+
+  \item{encoding}{encoding, e.g. UTF-8, latin1}
 
   \item{cite}{erzeugt Verweise}
 

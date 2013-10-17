@@ -3,18 +3,18 @@
 #' @param dir.in input-Verzeichnis
 #' @param dir.out output-Verzeichnis
 #' @param dir.bib bibtex-Verzeichnis
+#' @param encoding encoding, e.g. UTF-8, latin1
 #' @param cite erzeugt Verweise 
 #' @param quote ersetzen von Zitaten
 #' @param sec ersetzen Überschriften
 #' @param misc ersetzen von Steuerungszeichen
-#' @importFrom knitcitations read.bibtex
 #' @export writeTex
-writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, cite = T, quote = T, sec = T, misc = T, dup.rm = T) 
+writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, encoding = "UTF-8", cite = T, quote = T, sec = T, misc = T, dup.rm = T) 
 {
   if (cite) {
     if (is.null(dir.bib)) 
       dir.bib <- getwd()
-    bib <- suppressMessages(read.bibtex(list.files(dir.bib, pattern = ".bib$")))
+    bib <- suppressMessages(read.bibtex(list.files(dir.bib, pattern = ".bib$"), encoding))
     cat("Erstellen der Verweise:\n")
     citations.keys <- createCitations(bib, dup.rm)
   }
@@ -70,7 +70,7 @@ writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, cite = T, 
     }         
     cat("Schreibe Daten:\n",names(txt.out),"\n")
     for (name in names(txt.out)) {
-      writeLines(text = txt.out[[name]], paste(dir.out, "/", name, ".tex", sep = ""), useBytes = TRUE)
+      writeLines(text = txt.out[[name]], paste(dir.out, "/", name, ".tex", sep = ""))
     }
   }
   quiet <- sapply(files, writeSingle, citations.keys)
