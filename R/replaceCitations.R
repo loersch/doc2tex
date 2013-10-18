@@ -1,4 +1,4 @@
-replaceCitations <- function (citations.keys, txt, filename = NULL) 
+replaceCitations <- function (citations.keys, txt, filename = NULL, refsection) 
 {
   env <- environment()
   list2env(citations.keys, env)
@@ -29,7 +29,10 @@ replaceCitations <- function (citations.keys, txt, filename = NULL)
     txt3 <- gsub(citations3m[i], "\\1\\3 \\1\\4",  txt3)
   }
   for (i in 1:length(keys2)) {
-    txt3 <- gsub(citations3[i], paste("\\\\citep*{", keys2[i], "}", sep = ""),  txt3)
+    if (refsection)
+      txt3 <- gsub(citations3[i], paste("\\\\citep{", keys2[i], "}", sep = ""),  txt3)
+    else
+      txt3 <- gsub(citations3[i], paste("\\\\citep*{", keys2[i], "}", sep = ""),  txt3)
   }
   for (i in 1:length(keys2)) {
     txt3 <- gsub(citations3a[i], paste("\\\\citepa*{", keys2[i], "}", sep = ""),  txt3)
@@ -40,7 +43,10 @@ replaceCitations <- function (citations.keys, txt, filename = NULL)
     txt4 <- gsub(citations4m[i], "\\1\\4 \\1\\(",  txt4)
   }
   for (i in 1:length(keys2)) {
-    txt4 <- gsub(citations4[i], paste("\\\\citet*{", keys2[i], "}", sep = ""),  txt4)
+    if (refsection)
+      txt4 <- gsub(citations4[i], paste("\\\\citet{", keys2[i], "}", sep = ""),  txt4)
+    else
+      txt4 <- gsub(citations4[i], paste("\\\\citet*{", keys2[i], "}", sep = ""),  txt4)
   }
   for (i in 1:length(keys2)) {
     txt4 <- gsub(citations4a[i], paste("\\\\citeta*{", keys2[i], "}", sep = ""),  txt4)

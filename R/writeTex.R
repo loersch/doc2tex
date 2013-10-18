@@ -8,8 +8,9 @@
 #' @param quote ersetzen von Zitaten
 #' @param sec ersetzen Überschriften
 #' @param misc ersetzen von Steuerungszeichen
+#' @param refsection boolean, biblatex's refsection bzw. refsegment
 #' @export writeTex
-writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, encoding = "UTF-8", cite = T, quote = T, sec = T, misc = T, dup.rm = T) 
+writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, encoding = "UTF-8", cite = T, quote = T, sec = T, misc = T, refsection = T, dup.rm = T) 
 {
   if (cite) {
     if (is.null(dir.bib)) 
@@ -24,7 +25,7 @@ writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, encoding =
     filename <- sub(".txt", "", input)
     cat("\nDokument:", filename, "\n")
     if (cite) {
-      txt.out <- replaceCitations(citations.keys, txt.in, filename)
+      txt.out <- replaceCitations(citations.keys, txt.in, filename, refsection)
       cC <- function (txt, pattern) sum(sapply(gregexpr(pattern, txt), function(x) sum(x>0)))
       cat("Es wurden", cC(txt.out[[4]], "\\cite"), "Zitate erkannt:\n")
       cat("\t+ citet  :", cC(txt.out[[4]], "\\citet\\{"), "\n")
@@ -61,10 +62,10 @@ writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, encoding =
     if (misc) {
       if (exists("txt.out")) {
         len <- length(txt.out)
-        txt.out <- c(txt.out, replaceMisc(txt.out[[len]]))
+        txt.out <- c(txt.out, replaceMisc(txt.out[[len]], refsection))
         names(txt.out)[len + 1] <- paste(names(txt.out)[len], "m", sep = "")
       } else {
-        txt.out <- replaceMisc(txt.in)
+        txt.out <- replaceMisc(txt.in, refsection)
         names(txt.out) <- paste(filename, "m", sep = "_") 
       }     
     }         

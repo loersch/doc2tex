@@ -24,8 +24,13 @@ replaceSections <- function (txt)
   list(txt)
 }
 
-replaceMisc <- function (txt) 
+replaceMisc <- function (txt, refsection) 
 {
+  if (refsection) {
+    txt <- gsub('\\}[ ;]{,2}\\\\cite(t|p)\\{', ',', txt)
+    txt <- gsub('\\}\\)', '\\}', txt)
+    txt <- gsub('\\(\\\\citep', '\\\\citep', txt)
+  }
   txt <- gsub('\\\\ ', '\\\\textbackslash ', txt)
   txt <- gsub('(%|&|_)', '\\\\\\1', txt)
   txt <- gsub(" (\\\\%)", "\\\\,\\1", txt)
