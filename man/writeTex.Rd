@@ -4,7 +4,7 @@
 \usage{
   writeTex(dir.in = "in", dir.out = "out", dir.bib = NULL,
     encoding = "UTF-8", cite = T, quote = T, sec = T,
-    misc = T, dup.rm = T)
+    misc = T, refsection = T, dup.rm = T)
 }
 \arguments{
   \item{dir.in}{input-Verzeichnis}
@@ -22,6 +22,9 @@
   \item{sec}{ersetzen Überschriften}
 
   \item{misc}{ersetzen von Steuerungszeichen}
+
+  \item{refsection}{boolean, biblatex's refsection bzw.
+  refsegment}
 }
 \description{
   Erleichterung der Migration zu Latex. Hierzu werden die
