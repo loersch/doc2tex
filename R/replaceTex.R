@@ -7,18 +7,23 @@ replaceQuotations <- function (txt)
   list(txt)
 }
 
-replaceSections <- function (txt) 
+replaceSections <- function (txt, chapter) 
 {
-  txt[1:5] <- sub('^([0-9]+\\.){1}[ \t]+([[:upper:]]{1}[[:print:]]+)', '\\\\chapter{\\2}\n\\\\label{cha:\\2}\n\\\\vfill', txt[1:5])
-  txt[1:30] <- sub('^(Hadenfeldt, J\\. C\\.(,| &).*)', '\\\\begin{small}\n\\1\n\\\\end{small}\n\\\\newpage', txt[1:30])
-  if (any(grepl("\\vfill", txt[1:30])) &  any(grepl("\\\\begin\\{small\\}", txt[1:30]))) {
-    from <- grep("\\vfill", txt[1:30])[1] + 1
-    to <- grep("\\\\begin\\{small\\}", txt)[1] - 1
-    if (from < to)
-      txt <- txt[-c(from:to)]
+  if (chapter) {
+    txt[1:5] <- sub('^([0-9]+\\.){1}[ \t]+([[:upper:]]{1}[[:print:]]+)', '\\\\chapter{\\2}\n\\\\label{cha:\\2}\n\\\\vfill', txt[1:5])
+    txt[1:30] <- sub('^(Hadenfeldt, J\\. C\\.(,| &).*)', '\\\\begin{small}\n\\1\n\\\\end{small}\n\\\\newpage', txt[1:30])
+    if (any(grepl("\\vfill", txt[1:30])) &  any(grepl("\\\\begin\\{small\\}", txt[1:30]))) {
+      from <- grep("\\vfill", txt[1:30])[1] + 1
+      to <- grep("\\\\begin\\{small\\}", txt)[1] - 1
+      if (from < to)
+        txt <- txt[-c(from:to)]
+    }
+    txt <- sub('^([0-9]+\\.{0,1}){1}[ \t]+([[:upper:]]{1}[[:print:]]+)$', '\\\\section{\\2}\n\\\\label{sec:\\2}', txt)
+    txt <- sub('^([0-9]+\\.{0,1}){2}[ \t]+([[:upper:]]{1}[[:print:]]+)$', '\\\\subsection{\\2}\n\\\\label{ssec:\\2}', txt)  
+  } else {
+    txt <- sub('^([0-9]+\\.{0,1}){2}[ \t]+([[:upper:]]{1}[[:print:]]+)$', '\\\\section{\\2}\n\\\\label{sec:\\2}', txt)
+    txt <- sub('^([0-9]+\\.{0,1}){3}[ \t]+([[:upper:]]{1}[[:print:]]+)$', '\\\\subsection{\\2}\n\\\\label{ssec:\\2}', txt)
   }
-  txt <- sub('^([0-9]+\\.){2}[ \t]+([[:upper:]]{1}[[:print:]]+)$', '\\\\section{\\2}\n\\\\label{sec:\\2}', txt)
-  txt <- sub('^([0-9]+\\.){3}[ \t]+([[:upper:]]{1}[[:print:]]+)$', '\\\\subsection{\\2}\n\\\\label{ssec:\\2}', txt)
   txt <- sub('^(Abstract)$', '\\\\section*{\\1}\n\\\\label{ssec:\\1}', txt)
   txt <- sub('^([[:alnum:] ]+)$', '\\\\subsection*{\\1}\n\\\\label{ssec:\\1}', txt)
   list(txt)

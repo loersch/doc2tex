@@ -9,8 +9,10 @@
 #' @param sec ersetzen Überschriften
 #' @param misc ersetzen von Steuerungszeichen
 #' @param refsection boolean, biblatex's refsection bzw. refsegment
+#' @param dub.rm Entfernt Dublicate in der bibtex-Datei
+#' @param chapter Existieren Kapitel (book)
 #' @export writeTex
-writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, encoding = "UTF-8", cite = T, quote = T, sec = T, misc = T, refsection = T, dup.rm = T) 
+writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, encoding = "UTF-8", cite = T, quote = T, sec = T, misc = T, refsection = T, dup.rm = T, chapter = F) 
 {
   if (cite) {
     if (is.null(dir.bib)) 
@@ -19,7 +21,7 @@ writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, encoding =
     cat("Erstellen der Verweise:\n")
     citations.keys <- createCitations(bib, dup.rm)
   }
-  files <- list.files(dir.in, pattern = ".txt")
+  files <- list.files(dir.in, pattern = ".txt$")
   writeSingle <- function (input, citations.keys) {
     txt.in <- readLines(paste(dir.in, input, sep = "/"), encoding = "UTF-8")
     filename <- sub(".txt", "", input)
@@ -52,7 +54,7 @@ writeTex <- function (dir.in = "in", dir.out = "out", dir.bib = NULL, encoding =
     if (sec) {
       if (exists("txt.out")) {
         len <- length(txt.out)
-        txt.out <- c(txt.out, replaceSections(txt.out[[len]]))
+        txt.out <- c(txt.out, replaceSections(txt.out[[len]], chapter))
         names(txt.out)[len + 1] <- paste(names(txt.out)[len], "s", sep = "")
       } else {
         txt.out <- replaceSections(txt.in)
